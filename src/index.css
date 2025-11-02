@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+
+
+body{
+    margin: 0 50px;
+}
+
+@media (max-width:768px){
+    body{
+        margin: 0 10px;
+    }
+}
