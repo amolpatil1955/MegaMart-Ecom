@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { RiMenu2Fill } from "react-icons/ri";
 import { IoSearch } from "react-icons/io5";
 import { IoCartOutline } from "react-icons/io5";
@@ -15,6 +15,8 @@ import AdSection from './AdSection';
 
 const Navbar = () => {
   const { cartItems } = useCart(); // ✅ get addToCart function
+  const [search, setsearch] = useState('')
+
 
 
   return (
@@ -32,7 +34,7 @@ const Navbar = () => {
 
             <div className='  h-10 w-auto bg-[#f3f9fb] rounded-[7px]  items-center hidden md:flex '>
                 <p className='text-2xl p-2  text-[#4E97D1]'><IoSearch/></p>
-                <input type="text" placeholder='Search for products, brands and more' className=' w-76 p-2 outline-none '/>
+                <input type="text" onChange={(e)=>setsearch(e.target.value)} placeholder='Search for products, brands and more' className=' w-76 p-2 outline-none '/>
                 <p className='text-2xl p-2  text-[#4E97D1]'><RiMenuUnfoldLine/></p>
             </div>
             
@@ -49,7 +51,7 @@ const Navbar = () => {
      </div>  
      <Sliders/>
      <CategoryBtn/>
-     <Prodcut/> 
+     <Prodcut search={search} /> 
      <AdSection/> 
      <Footer/>       
    </>

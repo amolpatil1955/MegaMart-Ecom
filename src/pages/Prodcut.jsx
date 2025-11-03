@@ -1,14 +1,41 @@
 import ProdcutData from "../store/Product";
 import { IoStar } from "react-icons/io5";
 import { Toaster, toast } from "react-hot-toast";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
+import Loadingpage from "../components/Loding";
 
 import { useCart } from "../context/Cartcontext";
 
-const Prodcut = () => {
+const Prodcut = ({search}) => {
   const navigate = useNavigate();
   const { addToCart } = useCart(); // ✅ get addToCart function
+ const [filteredProducts, setFilteredProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (search.trim() === "") {
+      setFilteredProducts(ProdcutData);
+      setLoading(false); // ✅ Reset loader
+
+      return;
+    }
+
+    // 🕑 Start loading
+    setLoading(true);
+
+    // ⏳ Simulate delay (2 seconds)
+    const timer = setTimeout(() => {
+      const filtered = ProdcutData.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase())
+      );
+      setFilteredProducts(filtered);
+      setLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [search]);
+
 
   const AddtoAlert = () => {
     toast.success(` added to cart!`);
@@ -33,9 +60,14 @@ const Prodcut = () => {
           </button>
         </div>
       </div>
+{
+  loading ?   ( <Loadingpage/>  ) : (
+    
+
+
 
       <div className="w-full h-full grid grid-cols-2 gap-3  md:grid-cols-4 lg:grid-cols-5    max-w-7xl mx-auto ">
-        {ProdcutData.map((e) => {
+        {filteredProducts.map((e) => {
           const rating = Number(e.rating);
 
           return (
@@ -88,7 +120,9 @@ const Prodcut = () => {
             </div>
           );
         })}
+
       </div>
+      )}
     </div>
   );
 };
