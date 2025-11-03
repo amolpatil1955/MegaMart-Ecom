@@ -30,14 +30,14 @@ const Navbar = () => {
                 </div>
            </div> 
 
-        <div className='flex  justify-center items-center  '>
 
-            <div className='  h-10 w-auto bg-[#f3f9fb] rounded-[7px]  items-center hidden md:flex '>
+           <div className='  h-10 w-auto bg-[#f3f9fb] rounded-[7px]  items-center hidden md:flex '>
                 <p className='text-2xl p-2  text-[#4E97D1]'><IoSearch/></p>
                 <input type="text" onChange={(e)=>setsearch(e.target.value)} placeholder='Search for products, brands and more' className=' w-76 p-2 outline-none '/>
                 <p className='text-2xl p-2  text-[#4E97D1]'><RiMenuUnfoldLine/></p>
             </div>
-            
+
+        <div className='flex  justify-center items-center  '>
              <div className='h-10 w-auto bg-white mx-1 relative cursor-pointer flex items-center '>
                 <p className='text-2xl p-1  text-[#4E97D1]'><IoCartOutline/></p>
                 <Link to={"/cart"} className='text-md p-1  text-[#4E97D1]'>Cart</Link>
@@ -47,8 +47,17 @@ const Navbar = () => {
             <div className='h-9 mx-1 w-auto p-2 cursor-pointer  rounded-[5px]  flex items-center '>
                 <h2 className='text-md p-1  text-white'><Login/></h2>
             </div>    
-       </div>
      </div>  
+       </div>
+     {/* desptop size hide this serachbar */}
+     <div className='h-17 w-full bg-white sticky top-0 z-50 flex justify-center items-center md:hidden'>
+
+       <div className='  h-10 w-[80%] flex justify-center  bg-[#f3f9fb] rounded-[7px]  items-center    '>
+                <p className='text-2xl p-2  text-[#4E97D1]'><IoSearch/></p>
+                <input type="text" onChange={(e)=>setsearch(e.target.value)} placeholder='Search for products, brands and more' className=' w-76 p-2 outline-none '/>
+                <p className='text-2xl p-2  text-[#4E97D1]'><RiMenuUnfoldLine/></p>
+            </div>
+     </div>
      <Sliders/>
      <CategoryBtn/>
      <Prodcut search={search} /> 
